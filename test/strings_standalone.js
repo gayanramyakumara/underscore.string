@@ -30,4 +30,8 @@ $(document).ready(function() {
     deepEqual(s("hello\nworld").lines(), ["hello", "world"]);
   });
 
+  test("prototype methods are available in the chain", function() {
+    equal(s("foo").toUpperCase().value(), "FOO");
+  });
+
 });

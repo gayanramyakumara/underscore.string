@@ -109,4 +109,28 @@ function fn2method(key, fn) {
 // Copy functions to instance methods for chaining
 for (var key in s) fn2method(key, s[key]);
 
+function prototype2method(methodName) {
+  fn2method(methodName, function() {
+    var context = arguments[0];
+    var args = Array.prototype.slice.call(arguments, 1);
+    return String.prototype[methodName].apply(context, args);
+  });
+
+}
+
+var prototypeMethods = [
+  "toUpperCase",
+  "toLowerCase",
+  "split",
+  "replace",
+  "slice",
+  "substring",
+  "substr",
+  "concat",
+];
+
+for (var key in prototypeMethods) prototype2method(prototypeMethods[key]);
+
+
+
 module.exports = s;
